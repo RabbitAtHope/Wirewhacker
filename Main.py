@@ -11,7 +11,27 @@ wifiPasswords = [
     "123456",
     "1234567",
     "12345678",
+    "123456789",
+    "abc",
+    "admin",
+    "att",
+    "attwifi",
+    "bonvoy",
+    "default",
+    "guest",
+    "hilton",
+    "hotel",
+    "hyatt",
+    "internet",
+    "letmein",
+    "marriott",
+    "Password",
     "password",
+    "Password123",
+    "password123",
+    "visitor",
+    "wifi",
+    "wireless",
 ]
 
 def connect_to_wifi(ssid, password):
@@ -135,54 +155,67 @@ def list_wifi_networks():
     
     return networks
 
-# List available Wi-Fi networks
-networks = []
-while not networks:
-    networks = list_wifi_networks()
-    print(f"Detecting [{bcolors.WARNING}"+str(len(networks))+f"{bcolors.ENDC}] networks...")
-    if not networks:
-        time.sleep(5)
+def thinBorderBlue():
+    print(f"{bcolors.BLUE}+{bcolors.ENDC}" + (f"{bcolors.BLUE}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}{bcolors.CYAN}-{bcolors.ENDC}{bcolors.OKCYAN}-{bcolors.ENDC}{bcolors.CYAN}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}" * 12) + f"{bcolors.ENDC}{bcolors.BLUE}+{bcolors.ENDC}")
 
-# Print available networks
-print("Available Wi-Fi Networks:")
-ssids = []
-i = 1
-for ssid in networks:
-    print(f"{bcolors.WARNING}{i}{bcolors.ENDC}. "+f"{bcolors.OKCYAN}"+networks[ssid]["SSID"]+f"{bcolors.ENDC}",end="")
-    if networks[ssid]["Authentication"]:
-        print(f" ({bcolors.WARNING}"+networks[ssid]["Authentication"]+f"{bcolors.ENDC})",end="")
-    if networks[ssid]["Encryption"]:
-        print(f" ({bcolors.WARNING}"+networks[ssid]["Encryption"]+f"{bcolors.ENDC})",end="")
-    if networks[ssid]["Band"]:
-        print(f" ({bcolors.WARNING}"+networks[ssid]["Band"]+f"{bcolors.ENDC})",end="")
-    if networks[ssid]["Signal"]:
-        number = int((networks[ssid]["Signal"]).replace('%', ''))
-        if number > 90:
-            print(f" ({bcolors.OKGREEN}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
-        elif number > 70:
-            print(f" ({bcolors.GREEN}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
+def main():
+    
+    thinBorderBlue()
+    
+    # List available Wi-Fi networks
+    networks = []
+    while not networks:
+        networks = list_wifi_networks()
+        print(f" Detecting [{bcolors.WARNING}"+str(len(networks))+f"{bcolors.ENDC}] networks...")
+        if not networks:
+            time.sleep(5)
+
+    thinBorderBlue()
+
+    # Print available networks
+    print(" Available Wi-Fi Networks:")
+    ssids = []
+    i = 1
+    for ssid in networks:
+        print(f" {bcolors.WARNING}{i}{bcolors.ENDC}. "+f"{bcolors.OKCYAN}"+networks[ssid]["SSID"]+f"{bcolors.ENDC}",end="")
+        if networks[ssid]["Authentication"]:
+            print(f" (🔒 {bcolors.WARNING}"+networks[ssid]["Authentication"]+f"{bcolors.ENDC})",end="")
+        if networks[ssid]["Encryption"]:
+            print(f" ({bcolors.YELLOW}"+networks[ssid]["Encryption"]+f"{bcolors.ENDC})",end="")
+        if networks[ssid]["Band"]:
+            print(f" ({bcolors.WARNING}"+networks[ssid]["Band"]+f"{bcolors.ENDC})",end="")
+        if networks[ssid]["Signal"]:
+            number = int((networks[ssid]["Signal"]).replace('%', ''))
+            if number > 90:
+                print(f" ({bcolors.OKGREEN}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
+            elif number > 70:
+                print(f" ({bcolors.GREEN}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
+            else:
+                print(f" ({bcolors.FAIL}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
+        print("")
+        i+=1
+        ssids.append(ssid)
+
+    thinBorderBlue()
+
+    # Ask the user to select a network to connect to
+    userInput = input(f" Select a network, or input all ({bcolors.OKGREEN}a{bcolors.ENDC}) to try them all: {bcolors.OKGREEN}")
+    print(f"{bcolors.ENDC}")
+    if userInput:
+        if userInput == "a":
+            # Cycle through all available networks trying them all
+            for ssid in ssids:
+                for password in wifiPasswords:
+                    if connect_to_wifi(ssid, password):
+                        exit
         else:
-            print(f" ({bcolors.FAIL}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
-    print("")
-    i+=1
-    ssids.append(ssid)
-
-# Ask the user to select a network to connect to
-userInput = input(f"Select a network, or input all ({bcolors.OKGREEN}a{bcolors.ENDC}) to try them all: {bcolors.OKGREEN}")
-print(f"{bcolors.ENDC}")
-if userInput:
-    if userInput == "a":
-        # Cycle through all available networks trying them all
-        for ssid in ssids:
+            # Focus on selected network only
+            selected_index = int(userInput) - 1
+            selected_ssid = ssids[selected_index]
+            # password = input(f"{bcolors.ENDC}Enter the password for {bcolors.OKCYAN}{selected_ssid}{bcolors.ENDC}: {bcolors.OKGREEN}")
+            # print(f"{bcolors.ENDC}")
             for password in wifiPasswords:
-                if connect_to_wifi(ssid, password):
+                if connect_to_wifi(selected_ssid, password):
                     exit
-    else:
-        # Focus on selected network only
-        selected_index = int(userInput) - 1
-        selected_ssid = ssids[selected_index]
-        # password = input(f"{bcolors.ENDC}Enter the password for {bcolors.OKCYAN}{selected_ssid}{bcolors.ENDC}: {bcolors.OKGREEN}")
-        # print(f"{bcolors.ENDC}")
-        for password in wifiPasswords:
-            if connect_to_wifi(selected_ssid, password):
-                exit
+
+main()
