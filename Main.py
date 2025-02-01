@@ -36,7 +36,7 @@ wifiPasswords = [
 
 def connect_to_wifi(ssid, password):
     
-    print(f"{bcolors.OKCYAN}"+ssid+f"{bcolors.ENDC}:{bcolors.CYAN}"+password+f"{bcolors.ENDC}")
+    print(f" ➡️ {bcolors.OKCYAN}"+ssid+f"{bcolors.ENDC}:{bcolors.CYAN}"+password+f"{bcolors.ENDC}")
     
     try:
         # Connect to the Wi-Fi network using netsh
@@ -153,7 +153,11 @@ def list_wifi_networks():
             s = line.split(":")[1].strip()
             networks[currentSSID]['Radio Type'] = s
     
-    return networks
+    # Sort by highest signal strength
+    sorted_networks = sorted(networks.items(), key=lambda x: int(x[1].get('Signal', '0').replace('%', '').strip()), reverse=True)
+    sorted_network_dict = {ssid: details for ssid, details in sorted_networks}
+    
+    return sorted_network_dict
 
 def thinBorderBlue():
     print(f"{bcolors.BLUE}+{bcolors.ENDC}" + (f"{bcolors.BLUE}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}{bcolors.CYAN}-{bcolors.ENDC}{bcolors.OKCYAN}-{bcolors.ENDC}{bcolors.CYAN}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}" * 12) + f"{bcolors.ENDC}{bcolors.BLUE}+{bcolors.ENDC}")
@@ -200,14 +204,17 @@ def main():
 
     # Ask the user to select a network to connect to
     userInput = input(f" Select a network, or input all ({bcolors.OKGREEN}a{bcolors.ENDC}) to try them all: {bcolors.OKGREEN}")
-    print(f"{bcolors.ENDC}")
+    print(f"{bcolors.ENDC}",end="")
+    
+    thinBorderBlue()
+    
     if userInput:
         if userInput == "a":
             # Cycle through all available networks trying them all
             for ssid in ssids:
                 for password in wifiPasswords:
                     if connect_to_wifi(ssid, password):
-                        exit
+                        return
         else:
             # Focus on selected network only
             selected_index = int(userInput) - 1
@@ -216,6 +223,6 @@ def main():
             # print(f"{bcolors.ENDC}")
             for password in wifiPasswords:
                 if connect_to_wifi(selected_ssid, password):
-                    exit
+                    return
 
 main()
