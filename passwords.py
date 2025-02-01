@@ -1,4 +1,8 @@
 wifiPasswords = [
+
+    "1111",
+    "11111",
+    "111111",
     "123",
     "1234",
     "12345",
@@ -6,24 +10,100 @@ wifiPasswords = [
     "1234567",
     "12345678",
     "123456789",
+    "1234567890",
+    "1q2w3e4r",
+    "1qaz2wsx",
+    
     "abc",
+    "abc123",
     "admin",
+    "admin123",
+    "administrator",
+    "administrator123",
+    "anonymous",
     "att",
     "attwifi",
+    
+    "baseball",
     "bonvoy",
+    "bonvoywifi",
+    
+    "changeme",
+    "computer",
+    
     "default",
+    "dragon",
+    
+    "fall",
+    "fall123",
+    "Fall2024",
+    "Fall2024!",
+    "Fall2025",
+    "Fall2025!",
+    "football",
+    
     "guest",
+    "guestwifi",
+    
     "hilton",
     "hotel",
+    "hotelwifi",
     "hyatt",
+    "hyattwifi",
+    
+    "iloveyou",
     "internet",
+    "itsonthefridge",
+    
     "letmein",
+    "letmeinplease",
+    
     "marriott",
+    "monkey",
+    
+    "onthefridge",
+    
+    "Passw0rd",
+    "passw0rd",
     "Password",
     "password",
+    "password1",
     "Password123",
     "password123",
+    "princess",
+    
+    "qwerty",
+    "qwerty1",
+    "qwerty123",
+    
+    "secret",
+    "spring",
+    "spring123",
+    "Spring2024",
+    "Spring2024!",
+    "Spring2025",
+    "Spring2025!",
+    "summer",
+    "summer123",
+    "Summer2024",
+    "Summer2024!",
+    "Summer2025",
+    "Summer2025!",
+    "sunshine",
+    "superman",
+    
+    "universal",
+    
     "visitor",
+    "visitorwifi",
+    
+    "wedonthavewifi",
+    "welcome",
+    "welcome123",
+    "wep",
+    "whatever",
     "wifi",
+    "wifipassword",
     "wireless",
+    "wpa",
 ]

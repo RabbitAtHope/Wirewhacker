@@ -182,8 +182,8 @@ def main():
     if userInput:
         if userInput == "a":
             # Cycle through all available networks trying them all
-            for ssid in ssids:
-                for password in passwords.wifiPasswords:
+            for password in passwords.wifiPasswords:
+                for ssid in ssids:
                     if connect_to_wifi(ssid, password):
                         return
         else:
