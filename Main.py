@@ -3,36 +3,7 @@ import subprocess
 import time
 
 from Colors import bcolors
-
-wifiPasswords = [
-    "123",
-    "1234",
-    "12345",
-    "123456",
-    "1234567",
-    "12345678",
-    "123456789",
-    "abc",
-    "admin",
-    "att",
-    "attwifi",
-    "bonvoy",
-    "default",
-    "guest",
-    "hilton",
-    "hotel",
-    "hyatt",
-    "internet",
-    "letmein",
-    "marriott",
-    "Password",
-    "password",
-    "Password123",
-    "password123",
-    "visitor",
-    "wifi",
-    "wireless",
-]
+import passwords
 
 def connect_to_wifi(ssid, password):
     
@@ -54,7 +25,7 @@ def connect_to_wifi(ssid, password):
         time.sleep(10)
         
         if is_connected():
-            print(f"{bcolors.OKGREEN}Success{bcolors.ENDC}.")
+            print(f"  ✅ {bcolors.OKGREEN}Success{bcolors.ENDC}.")
             return True
         
         return False
@@ -212,7 +183,7 @@ def main():
         if userInput == "a":
             # Cycle through all available networks trying them all
             for ssid in ssids:
-                for password in wifiPasswords:
+                for password in passwords.wifiPasswords:
                     if connect_to_wifi(ssid, password):
                         return
         else:
@@ -221,7 +192,7 @@ def main():
             selected_ssid = ssids[selected_index]
             # password = input(f"{bcolors.ENDC}Enter the password for {bcolors.OKCYAN}{selected_ssid}{bcolors.ENDC}: {bcolors.OKGREEN}")
             # print(f"{bcolors.ENDC}")
-            for password in wifiPasswords:
+            for password in passwords.wifiPasswords:
                 if connect_to_wifi(selected_ssid, password):
                     return
 
