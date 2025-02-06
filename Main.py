@@ -153,13 +153,13 @@ def main():
     i = 1
     for ssid in networks:
         print(f" {bcolors.WARNING}{i}{bcolors.ENDC}. "+f"{bcolors.OKCYAN}"+networks[ssid]["SSID"]+f"{bcolors.ENDC}",end="")
-        if networks[ssid]["Authentication"]:
+        if "Authentication" in networks[ssid] and networks[ssid]["Authentication"]:
             print(f" (🔒 {bcolors.WARNING}"+networks[ssid]["Authentication"]+f"{bcolors.ENDC})",end="")
-        if networks[ssid]["Encryption"]:
+        if "Encryption" in networks[ssid] and networks[ssid]["Encryption"]:
             print(f" ({bcolors.YELLOW}"+networks[ssid]["Encryption"]+f"{bcolors.ENDC})",end="")
-        if networks[ssid]["Band"]:
+        if "Band" in networks[ssid] and networks[ssid]["Band"]:
             print(f" ({bcolors.WARNING}"+networks[ssid]["Band"]+f"{bcolors.ENDC})",end="")
-        if networks[ssid]["Signal"]:
+        if "Signal" in networks[ssid] and networks[ssid]["Signal"]:
             number = int((networks[ssid]["Signal"]).replace('%', ''))
             if number > 90:
                 print(f" ({bcolors.OKGREEN}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
