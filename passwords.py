@@ -1,9 +1,12 @@
 wifiPasswords = [
 
+    "111",
     "1111",
     "11111",
     "111111",
+    
     "123",
+    "123123",
     "1234",
     "12345",
     "123456",
@@ -11,6 +14,7 @@ wifiPasswords = [
     "12345678",
     "123456789",
     "1234567890",
+    
     "1q2w3e4r",
     "1qaz2wsx",
     
@@ -100,9 +104,12 @@ wifiPasswords = [
     "wedonthavewifi",
     "welcome",
     "welcome123",
+    "welcome2",
     "wep",
     "whatever",
     "wifi",
+    "wifi123",
+    "wifi1234",
     "wifipassword",
     "wireless",
     "wpa",
