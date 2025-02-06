@@ -136,7 +136,7 @@ def thinBorderBlue():
 def main():
 
     thinBorderBlue()
-    print(f" {bcolors.FAIL}WARNING: To use this tool effectively, disconnect from WiFi.\n You may also need to forget saved WiFi profiles if you have connected to it before.")
+    print(f" {bcolors.FAIL}WARNING: To use this tool effectively, disconnect from WiFi.\n You may also need to forget saved WiFi profiles if you have connected to the network before.")
     thinBorderBlue()
     
     thinBorderBlue()
@@ -157,12 +157,20 @@ def main():
     i = 1
     for ssid in networks:
         print(f" {bcolors.WARNING}{i}{bcolors.ENDC}. "+f"{bcolors.OKCYAN}"+networks[ssid]["SSID"]+f"{bcolors.ENDC}",end="")
+        
+        # Authentication
         if "Authentication" in networks[ssid] and networks[ssid]["Authentication"]:
             print(f" (🔒 {bcolors.WARNING}"+networks[ssid]["Authentication"]+f"{bcolors.ENDC})",end="")
+        
+        # Encryption
         if "Encryption" in networks[ssid] and networks[ssid]["Encryption"]:
             print(f" ({bcolors.YELLOW}"+networks[ssid]["Encryption"]+f"{bcolors.ENDC})",end="")
+        
+        # Band
         if "Band" in networks[ssid] and networks[ssid]["Band"]:
             print(f" ({bcolors.WARNING}"+networks[ssid]["Band"]+f"{bcolors.ENDC})",end="")
+        
+        # Signal
         if "Signal" in networks[ssid] and networks[ssid]["Signal"]:
             number = int((networks[ssid]["Signal"]).replace('%', ''))
             if number > 90:
@@ -171,6 +179,7 @@ def main():
                 print(f" ({bcolors.GREEN}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
             else:
                 print(f" ({bcolors.FAIL}"+networks[ssid]["Signal"]+f"{bcolors.ENDC})",end="")
+        
         print("")
         i+=1
         ssids.append(ssid)
