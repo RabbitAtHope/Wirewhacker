@@ -134,6 +134,10 @@ def thinBorderBlue():
     print(f"{bcolors.BLUE}+{bcolors.ENDC}" + (f"{bcolors.BLUE}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}{bcolors.CYAN}-{bcolors.ENDC}{bcolors.OKCYAN}-{bcolors.ENDC}{bcolors.CYAN}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}{bcolors.BLUE}-{bcolors.ENDC}" * 12) + f"{bcolors.ENDC}{bcolors.BLUE}+{bcolors.ENDC}")
 
 def main():
+
+    thinBorderBlue()
+    print(f" {bcolors.FAIL}WARNING: To use this tool effectively, disconnect from WiFi.\n You may also need to forget saved WiFi profiles if you have connected to it before.")
+    thinBorderBlue()
     
     thinBorderBlue()
     
